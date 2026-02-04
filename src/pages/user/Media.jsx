@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Play, Heart, MessageCircle, Eye } from 'lucide-react';
-import BeforeAfterSlider from '../components/BeforeAfterSlider';
-import { getMediaContent } from '../services/api';
+import BeforeAfterSlider from '../../components/BeforeAfterSlider';
+import { getMediaContent } from '../../services/api';
 
 const CATEGORIES = ["All", "Haircut", "Grooming", "Styling"];
 

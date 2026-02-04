@@ -6,11 +6,21 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
 
-    // Load from localStorage on mount
+    // Load from localStorage on mount, or set default dev user
     useEffect(() => {
         const storedUser = localStorage.getItem('hsd_user');
         if (storedUser) {
             setUser(JSON.parse(storedUser));
+        } else {
+            // DEV USER BYPASS
+            const devUser = {
+                id: 1,
+                name: 'Valued Client',
+                email: 'client@example.com',
+                role: 'customer',
+                avatar: 'https://ui-avatars.com/api/?name=Client&background=f97316&color=fff'
+            };
+            setUser(devUser);
         }
     }, []);
 

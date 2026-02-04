@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Search, SlidersHorizontal, MapPin, Scissors, Sparkles, PenTool, Gem, Calendar, Clock, MoreVertical } from 'lucide-react';
-import AgencyCard from '../components/AgencyCard';
-import CategoryCard from '../components/CategoryCard';
-import { getAgencies, getAppointments } from '../services/api';
+import AgencyCard from '../../components/AgencyCard';
+import CategoryCard from '../../components/CategoryCard';
+import { getAgencies, getAppointments } from '../../services/api';
 
 const POPULAR_SERVICES = [
     { id: 1, title: "Barber", count: "25+ Active", icon: Scissors },

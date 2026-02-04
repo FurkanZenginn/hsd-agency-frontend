@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, LayoutDashboard, Calendar, Users, Image, ShoppingBag, Settings } from 'lucide-react';
+import { Menu, LayoutDashboard, Calendar, Users, Image, ShoppingBag, Settings, User, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { NavLink } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const SidebarItem = ({ icon: Icon, label, to }) => (
 
 const MainLayout = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
 
     const isAdmin = user?.role === 'admin';
 
@@ -67,14 +67,31 @@ const MainLayout = ({ children }) => {
                     {!isAdmin && (
                         <>
                             <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/home" />
+                            <SidebarItem icon={ShoppingBag} label="Products" to="/products" />
+                            <SidebarItem icon={Users} label="Our Experts" to="/explore-staff" />
                             <SidebarItem icon={Calendar} label="Appointments" to="/appointments" />
                             <SidebarItem icon={Image} label="Media Gallery" to="/media" />
                         </>
                     )}
 
-                    <div className="pt-12">
+                    <div className="pt-8">
+                        <div className="text-xs font-bold text-[#A8A29E] uppercase tracking-widest px-4 mb-4">Account</div>
+                        <SidebarItem icon={User} label="Profile" to="/profile" />
+                    </div>
+
+                    <div className="pt-2">
                         <div className="text-xs font-bold text-[#A8A29E] uppercase tracking-widest px-4 mb-4">Preferences</div>
-                        <SidebarItem icon={Settings} label="Settings" to="#" />
+                        <SidebarItem icon={Settings} label="Settings" to="/settings" />
+                    </div>
+
+                    <div className="pt-8 px-4">
+                        <button
+                            onClick={logout}
+                            className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 text-[var(--color-primary)] hover:bg-orange-50 hover:font-bold"
+                        >
+                            <LogOut size={20} />
+                            <span className="tracking-wide text-sm">Logout</span>
+                        </button>
                     </div>
                 </nav>
             </aside>
@@ -83,17 +100,28 @@ const MainLayout = ({ children }) => {
             <div className="flex-1 flex flex-col min-w-0 bg-[var(--color-background)]">
                 {/* Navbar - Light and Warm */}
                 <header className="sticky top-0 z-30 h-20 px-4 lg:px-8 flex items-center justify-between bg-[var(--color-background)]/90 backdrop-blur-md border-b border-[#E5E0D8]">
-                    <button
-                        className="lg:hidden p-2 text-[var(--color-foreground-muted)] hover:text-[var(--color-foreground)] transition-colors"
-                        onClick={() => setIsSidebarOpen(true)}
-                    >
-                        <Menu size={24} />
-                    </button>
+                    <div className="flex items-center gap-4">
+                        <button
+                            className="lg:hidden p-2 text-[var(--color-foreground-muted)] hover:text-[var(--color-foreground)] transition-colors"
+                            onClick={() => setIsSidebarOpen(true)}
+                        >
+                            <Menu size={24} />
+                        </button>
+                        {/* Mobile Logo */}
+                        <div className="lg:hidden font-bold text-xl tracking-tight text-[var(--color-foreground)]">
+                            HSD <span className="text-[var(--color-primary)]">AGENCY</span>
+                        </div>
+                    </div>
 
                     <div className="flex items-center space-x-6 ml-auto mr-4">
-                        <span className="text-sm font-medium text-[var(--color-foreground-muted)] hidden sm:block">
-                            Welcome back, <span className="text-[var(--color-foreground)] font-semibold">{user?.name || 'Guest'}</span>
-                        </span>
+                        <div className="hidden sm:flex flex-col items-end">
+                            <span className="text-sm font-bold text-[var(--color-foreground)]">
+                                {user?.name || 'Guest'}
+                            </span>
+                            <span className="text-xs text-[var(--color-foreground-muted)] font-medium uppercase tracking-wider">
+                                {isAdmin ? 'Business Admin' : 'Valued Client'}
+                            </span>
+                        </div>
                         <div className="w-10 h-10 rounded-full bg-orange-100 p-[2px] cursor-pointer ring-2 ring-transparent hover:ring-orange-200 transition-all shadow-sm">
                             <div className="w-full h-full rounded-full flex items-center justify-center overflow-hidden border border-orange-100">
                                 <img src={user?.avatar || `https://ui-avatars.com/api/?name=${user?.name || 'User'}&background=FF8C42&color=fff`} alt="Profile" />

@@ -45,17 +45,8 @@ body {
   /* Warm shadow */
 }
 
-@utility btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: var(--color-primary-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(255, 140, 66, 0.4);
-  }
+.btn-primary {
+  @apply bg-[#FF8C42] text-white px-4 py-2 rounded-lg transition-all hover:bg-[#e67e3b];
 }
 
 @utility text-gradient {

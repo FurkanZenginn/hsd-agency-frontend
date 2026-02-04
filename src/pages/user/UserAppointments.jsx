@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Calendar, MapPin, Clock, MoreVertical } from 'lucide-react';
-import { getAppointments } from '../services/api';
+import { getAppointments } from '../../services/api';
 
 const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
