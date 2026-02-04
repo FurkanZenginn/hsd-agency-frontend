@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  /* HSD AGENCY - High-End Warm Palette */
+
+  /* Backgrounds: Warm Cream */
+  --color-background: #FAF7F2;
+  --color-background-alt: #F2EFE9;
+
+  /* Surface: Pure White */
+  --color-surface: #FFFFFF;
+  --color-surface-hover: #FCFCFA;
+
+  /* Text: Deep Charcoal */
+  --color-foreground: #2D2A26;
+  --color-foreground-muted: #5C5854;
+
+  /* Accents */
+  --color-primary: #FF8C42;
+  /* Vibrant Sunset Orange */
+  --color-primary-hover: #E57A36;
+  --color-secondary: #7B9E89;
+  /* Sage Green */
+  --color-secondary-hover: #6A8A76;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* Utilities */
+
+@utility glass-card {
+  background-color: var(--color-surface);
+  border: 1px solid rgba(45, 42, 38, 0.05);
+  /* Charcoal hint */
+  box-shadow: 0 4px 20px -2px rgba(45, 42, 38, 0.05);
+  /* Warm shadow */
+}
+
+.btn-primary {
+  @apply bg-[#FF8C42] text-white px-4 py-2 rounded-lg transition-all hover:bg-[#e67e3b];
+}
+
+@utility text-gradient {
+  background: linear-gradient(135deg, #2D2A26 0%, #5C5854 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
