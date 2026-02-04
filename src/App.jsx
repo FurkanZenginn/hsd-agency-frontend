@@ -4,6 +4,7 @@ import MainLayout from './components/MainLayout';
 import AdminLayout from './layouts/AdminLayout'; // Import AdminLayout
 import Home from './pages/user/Home';
 import Landing from './pages/Landing';
+import Register from './pages/user/Register';
 import Login from './pages/Login';
 import AdminDashboard from './pages/AdminDashboard'; // Legacy Dashboard? Or renaming AdminOverview? 
 // Let's assume AdminDashboard is the old one, we should use AdminOverview if relevant, but let's stick to what was imported before or check imports.
@@ -32,6 +33,7 @@ function App() {
 
           {/* Unified Login Route */}
           <Route path="/login/:role" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
           {/* Customer Routes (Wrapped in MainLayout) */}
           <Route path="/home" element={<MainLayout><Home /></MainLayout>} />

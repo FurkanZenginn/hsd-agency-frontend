@@ -24,6 +24,41 @@ const Register = () => {
         }));
     };
 
+    const handlePhoneChange = (e) => {
+        // Strip all non-numeric characters
+        let value = e.target.value.replace(/\D/g, '');
+
+        // Use strict prefix logic: always enforce leading 90
+        // If the user completely clears the input, we might reset, but typically we enforce 90
+        // If the user tries to edit the 90, it will just re-add it because we strip and prepend.
+
+        // If value doesn't start with 90 or is shorter than 2 (e.g. user deleting), ensure it
+        if (!value.startsWith('90')) {
+            // If the user typed '5...', assume they mean 905...
+            value = '90' + value;
+        }
+
+        // Limit to 12 digits (90 + 10 digits)
+        if (value.length > 12) value = value.slice(0, 12);
+
+        // Format: +90 5XX-XXX-XXXX
+        let formatted = '+90';
+        if (value.length > 2) {
+            formatted += ' ' + value.slice(2, 5);
+        }
+        if (value.length > 5) {
+            formatted += '-' + value.slice(5, 8);
+        }
+        if (value.length > 8) {
+            formatted += '-' + value.slice(8, 12);
+        }
+
+        setFormData(prev => ({
+            ...prev,
+            phone: formatted
+        }));
+    };
+
     const handleRegister = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -107,8 +142,8 @@ const Register = () => {
                                     name="phone"
                                     required
                                     value={formData.phone}
-                                    onChange={handleChange}
-                                    placeholder="+1 (555) 000-0000"
+                                    onChange={handlePhoneChange}
+                                    placeholder="+90 544-540-1710"
                                     className="w-full bg-[var(--color-background)] border border-[rgba(0,0,0,0.05)] rounded-xl px-4 py-3 text-[var(--color-foreground)] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]/20 focus:border-[var(--color-primary)] transition-all"
                                 />
                                 <Phone size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400" />
