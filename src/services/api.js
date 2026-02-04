@@ -120,15 +120,15 @@ export const getMediaContent = async () => {
                 id: 101,
                 title: "Sharp Fade Revamp",
                 category: "Haircut",
-                before: "https://images.unsplash.com/photo-1552319681-42007138af69?auto=format&fit=crop&q=80&w=600",
-                after: "https://images.unsplash.com/photo-1552319681-42007138af69?auto=format&fit=crop&q=80&w=600&filt=sepia"
+                before: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800",
+                after: "https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=800&sat=-100"
             },
             {
                 id: 102,
                 title: "Beard Sculpting",
                 category: "Grooming",
-                before: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=600",
-                after: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=600&sat=-100"
+                before: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800",
+                after: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=800&sat=-100"
             }
         ],
         videos: [

@@ -42,20 +42,27 @@ const BeforeAfterSlider = ({ beforeImage, afterImage }) => {
             onMouseDown={handleMouseDown}
             onTouchStart={handleMouseDown}
         >
-            <div
-                className="absolute inset-0 w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: `url(${afterImage})` }}
+            <img
+                src={afterImage}
+                alt="After"
+                className="absolute inset-0 w-full h-full object-cover select-none"
+                draggable={false}
             />
-            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur text-foreground px-4 py-1.5 rounded-full text-xs font-bold shadow-sm z-10">AFTER</div>
+            <div className="absolute top-6 right-6 bg-white/90 backdrop-blur text-foreground px-4 py-1.5 rounded-full text-xs font-bold shadow-sm z-10 pointer-events-none">AFTER</div>
 
             <div
-                className="absolute inset-0 w-full h-full bg-cover bg-center"
+                className="absolute inset-0 w-full h-full"
                 style={{
-                    clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
-                    backgroundImage: `url(${beforeImage})`
+                    clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`
                 }}
             >
-                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur text-foreground px-4 py-1.5 rounded-full text-xs font-bold shadow-sm">BEFORE</div>
+                <img
+                    src={beforeImage}
+                    alt="Before"
+                    className="absolute inset-0 w-full h-full object-cover select-none"
+                    draggable={false}
+                />
+                <div className="absolute top-6 left-6 bg-white/90 backdrop-blur text-foreground px-4 py-1.5 rounded-full text-xs font-bold shadow-sm pointer-events-none">BEFORE</div>
             </div>
 
             <div

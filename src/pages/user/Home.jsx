@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Added import
 import { Search, SlidersHorizontal, MapPin, Scissors, Sparkles, PenTool, Gem, Calendar, Clock, MoreVertical } from 'lucide-react';
 import AgencyCard from '../../components/AgencyCard';
 import CategoryCard from '../../components/CategoryCard';
@@ -12,6 +13,7 @@ const POPULAR_SERVICES = [
 ];
 
 const Home = () => {
+    const navigate = useNavigate(); // Added hook
     const [agencies, setAgencies] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -66,7 +68,10 @@ const Home = () => {
                                 className="w-full bg-white h-16 pl-14 pr-6 rounded-2xl border-none shadow-xl text-[var(--color-foreground)] placeholder-stone-400 focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)]/30 transition-all font-medium"
                             />
                         </div>
-                        <button className="h-16 px-8 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/30 hover:bg-[var(--color-primary-hover)] transition-all hover:-translate-y-1">
+                        <button
+                            onClick={() => navigate('/book-appointment')}
+                            className="h-16 px-8 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/30 hover:bg-[var(--color-primary-hover)] transition-all hover:-translate-y-1"
+                        >
                             Book Appointment
                         </button>
                     </div>

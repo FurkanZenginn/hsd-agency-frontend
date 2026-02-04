@@ -1,26 +1,21 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import MainLayout from './components/MainLayout';
-import AdminLayout from './layouts/AdminLayout'; // Import AdminLayout
+import AdminLayout from './layouts/AdminLayout';
 import Home from './pages/user/Home';
 import Landing from './pages/Landing';
 import Register from './pages/user/Register';
 import Login from './pages/Login';
-import AdminDashboard from './pages/AdminDashboard'; // Legacy Dashboard? Or renaming AdminOverview? 
-// Let's assume AdminDashboard is the old one, we should use AdminOverview if relevant, but let's stick to what was imported before or check imports.
-// Wait, AdminOverview exists in src/pages/admin/AdminOverview.jsx. 
-// Step 632 AdminLayout used /admin/overview -> AdminOverview.
-// Let's import the NEW admin pages.
 import AdminOverview from './pages/admin/AdminOverview';
 import AdminAppointments from './pages/admin/AdminAppointments';
-import AdminStaff from './pages/admin/AdminStaff'; // New Import
-
+import AdminStaff from './pages/admin/AdminStaff';
 import UserAppointments from './pages/user/UserAppointments';
 import Media from './pages/user/Media';
 import Profile from './pages/user/Profile';
 import ExploreStaff from './pages/user/ExploreStaff';
 import Products from './pages/user/Products';
 import Settings from './pages/user/Settings';
+import Booking from './pages/user/Booking';
 import { AuthProvider } from './context/AuthContext';
 
 function App() {
@@ -44,6 +39,7 @@ function App() {
           <Route path="/products" element={<MainLayout><Products /></MainLayout>} />
           <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
           <Route path="/settings" element={<MainLayout><Settings /></MainLayout>} />
+          <Route path="/book-appointment" element={<MainLayout><Booking /></MainLayout>} />
 
           {/* Admin Routes (Wrapped in AdminLayout) */}
           <Route path="/admin" element={<AdminLayout />}>
