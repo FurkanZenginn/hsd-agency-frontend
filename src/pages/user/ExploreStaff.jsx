@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Star, Clock, Award } from 'lucide-react';
 import { getStaffMembers } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const StaffCard = ({ staff }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="group bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(249,115,22,0.15)] transition-all duration-300 hover:-translate-y-1 flex flex-col h-full">
             <div className="p-6 flex flex-col items-center flex-1">
@@ -53,7 +56,10 @@ const StaffCard = ({ staff }) => {
 
             {/* Action */}
             <div className="p-4 pt-0 mt-auto">
-                <button className="w-full py-3 rounded-xl bg-[var(--color-primary)] text-white font-bold text-sm hover:bg-[var(--color-primary-hover)] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]">
+                <button
+                    onClick={() => navigate('/book-appointment')}
+                    className="w-full py-3 rounded-xl bg-[var(--color-primary)] text-white font-bold text-sm hover:bg-[var(--color-primary-hover)] transition-all duration-300 shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]"
+                >
                     Book Appointment
                 </button>
             </div>

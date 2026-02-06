@@ -66,7 +66,7 @@ const Media = () => {
                                     <h3 className="font-bold text-[var(--color-foreground)]">{item.title}</h3>
                                     <span className="text-xs font-bold text-[var(--color-primary)] uppercase tracking-wider">{item.category}</span>
                                 </div>
-                                <div className="h-[350px]">
+                                <div>
                                     <BeforeAfterSlider beforeImage={item.before} afterImage={item.after} />
                                 </div>
                             </div>

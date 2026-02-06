@@ -88,6 +88,18 @@ const Login = () => {
                             {loading ? 'Verifying...' : 'Sign In'}
                         </button>
                     </form>
+
+                    <div className="mt-6 text-center">
+                        <p className="text-[var(--color-foreground-muted)] text-sm">
+                            Don't have an account?{' '}
+                            <button
+                                onClick={() => navigate('/register')}
+                                className="text-[var(--color-primary)] font-semibold hover:underline"
+                            >
+                                Register
+                            </button>
+                        </p>
+                    </div>
                 </div>
             </motion.div>
         </div>

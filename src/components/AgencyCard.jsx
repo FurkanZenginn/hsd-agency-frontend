@@ -1,7 +1,10 @@
 import React from 'react';
 import { Star, MapPin } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const AgencyCard = ({ name, category, rating, reviewCount, imageUrl, distance, address }) => {
+    const navigate = useNavigate();
+
     return (
         <div className="group bg-white rounded-3xl overflow-hidden border border-stone-100 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_30px_-4px_rgba(249,115,22,0.15)] transition-all duration-300 hover:-translate-y-1">
 
@@ -42,7 +45,10 @@ const AgencyCard = ({ name, category, rating, reviewCount, imageUrl, distance, a
                 </div>
 
                 {/* Action Button */}
-                <button className="w-full mt-2 py-3 rounded-xl bg-orange-50 text-[var(--color-primary)] font-bold text-sm hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg">
+                <button
+                    onClick={() => navigate('/book-appointment')}
+                    className="w-full mt-2 py-3 rounded-xl bg-orange-50 text-[var(--color-primary)] font-bold text-sm hover:bg-[var(--color-primary)] hover:text-white transition-all duration-300 shadow-sm hover:shadow-lg"
+                >
                     Book Now
                 </button>
             </div>

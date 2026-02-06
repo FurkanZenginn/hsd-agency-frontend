@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom'; // Added import
 import { Search, SlidersHorizontal, MapPin, Scissors, Sparkles, PenTool, Gem, Calendar, Clock, MoreVertical } from 'lucide-react';
 import AgencyCard from '../../components/AgencyCard';
 import CategoryCard from '../../components/CategoryCard';
@@ -12,6 +13,7 @@ const POPULAR_SERVICES = [
 ];
 
 const Home = () => {
+    const navigate = useNavigate(); // Added hook
     const [agencies, setAgencies] = useState([]);
     const [appointments, setAppointments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -66,15 +68,18 @@ const Home = () => {
                                 className="w-full bg-white h-16 pl-14 pr-6 rounded-2xl border-none shadow-xl text-[var(--color-foreground)] placeholder-stone-400 focus:outline-none focus:ring-4 focus:ring-[var(--color-primary)]/30 transition-all font-medium"
                             />
                         </div>
-                        <button className="h-16 px-8 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/30 hover:bg-[var(--color-primary-hover)] transition-all hover:-translate-y-1">
+                        <button
+                            onClick={() => navigate('/book-appointment')}
+                            className="h-16 px-8 bg-[var(--color-primary)] rounded-2xl flex items-center justify-center text-white font-bold shadow-lg shadow-orange-500/30 hover:bg-[var(--color-primary-hover)] transition-all hover:-translate-y-1"
+                        >
                             Book Appointment
                         </button>
                     </div>
-                </div>
-            </section>
+                </div >
+            </section >
 
             {/* 2. Popular Categories */}
-            <section className="space-y-6">
+            < section className="space-y-6" >
                 <h2 className="text-2xl font-bold text-[var(--color-foreground)] px-2">Explore Popular Services</h2>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {POPULAR_SERVICES.map(service => (
@@ -87,10 +92,10 @@ const Home = () => {
                         />
                     ))}
                 </div>
-            </section>
+            </section >
 
             {/* 3. Upcoming Appointments */}
-            <section className="space-y-6">
+            < section className="space-y-6" >
                 <div className="flex items-center justify-between px-2">
                     <h2 className="text-2xl font-bold text-[var(--color-foreground)]">Upcoming Appointments</h2>
                     <button className="text-[var(--color-primary)] font-semibold hover:underline">View All</button>
@@ -129,26 +134,28 @@ const Home = () => {
                         </div>
                     )}
                 </div>
-            </section>
+            </section >
 
             {/* 4. Featured Near You */}
-            <section className="space-y-6">
+            < section className="space-y-6" >
                 <div className="flex items-center justify-between px-2">
                     <h2 className="text-2xl font-bold text-[var(--color-foreground)]">Featured Near You</h2>
                     <button className="text-[var(--color-primary)] font-semibold hover:underline">See All Agencies</button>
                 </div>
 
-                {loading ? (
-                    <div className="py-20 text-center text-stone-400">Finding best agencies...</div>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {agencies.map(agency => (
-                            <AgencyCard key={agency.id} {...agency} />
-                        ))}
-                    </div>
-                )}
-            </section>
-        </div>
+                {
+                    loading ? (
+                        <div className="py-20 text-center text-stone-400">Finding best agencies...</div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {agencies.map(agency => (
+                                <AgencyCard key={agency.id} {...agency} />
+                            ))}
+                        </div>
+                    )
+                }
+            </section >
+        </div >
     );
 };
 

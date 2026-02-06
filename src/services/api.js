@@ -30,6 +30,21 @@ export const loginUser = async (email, roleType) => {
     }
 };
 
+export const registerUser = async (userData) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return {
+        success: true,
+        user: {
+            id: Date.now(),
+            name: userData.name || 'New User',
+            email: userData.email,
+            role: 'customer',
+            avatar: 'https://ui-avatars.com/api/?name=User&background=random'
+        },
+        redirect: '/home'
+    };
+};
+
 export const getAppointments = async () => {
     await new Promise(resolve => setTimeout(resolve, 500));
     return [
