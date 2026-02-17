@@ -279,116 +279,117 @@ export const getProducts = async () => {
         {
             id: 1,
             name: "Volcanic Ash Texturizing Paste",
-            category: "Styling",
+            sku: "SKU-PASTE-001",
+            category: "Hair",
             price: 28,
-            rating: 4.9,
-            reviewCount: 420,
+            stock: 45,
             image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: true,
-            isBestSeller: true,
-            stockLevel: "High",
-            shortDescription: "Matte finish with strong hold.",
-            longDescription: "Sourced from volcanic regions, this mineral-rich paste provides a reworkable hold that adds instant volume and texture without the shine. Perfect for modern, messy looks."
+            description: "Matte finish with strong hold. Sourced from volcanic regions, this mineral-rich paste provides a reworkable hold that adds instant volume and texture.",
+            predictedRestock: "Nov 15, 2026",
+            demand: "High"
         },
         {
             id: 2,
             name: "Sandalwood & Sage Beard Oil",
-            category: "Grooming",
+            sku: "SKU-OIL-002",
+            category: "Spa", // Mapped to Spa/Grooming
             price: 24,
-            rating: 4.8,
-            reviewCount: 156,
+            stock: 12,
             image: "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: false,
-            isBestSeller: true,
-            stockLevel: "Medium",
-            shortDescription: "Hydrates and softens coarse beards.",
-            longDescription: "A premium blend of natural oils designed to soften your beard and moisturize the skin underneath. The earthy scent of sandalwood and sage provides a calming effect."
+            description: "Hydrates and softens coarse beards. A premium blend of natural oils designed to soften your beard and moisturize the skin underneath.",
+            predictedRestock: "Oct 30, 2026",
+            demand: "Medium"
         },
         {
             id: 3,
             name: "Daily Revitalizing Face Wash",
-            category: "Rituals",
+            sku: "SKU-WASH-003",
+            category: "Spa",
             price: 22,
-            rating: 4.7,
-            reviewCount: 310,
+            stock: 8,
             image: "https://images.unsplash.com/photo-1556228720-1987ba889608?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: false,
-            isBestSeller: false,
-            stockLevel: "High",
-            shortDescription: "Gentle cleanser for all skin types.",
-            longDescription: "Infused with aloe vera and cucumber, this gentle face wash removes impurities without stripping your skin's natural moisture barrier."
+            description: "Gentle cleanser for all skin types. Infused with aloe vera and cucumber, this gentle face wash removes impurities without stripping moisture.",
+            predictedRestock: "Oct 28, 2026",
+            demand: "High"
         },
         {
             id: 4,
-            name: "Premium Safety Razor",
-            category: "Grooming",
+            name: "Premium Tattoo Ink (Black)",
+            sku: "SKU-INK-004",
+            category: "Tattoo",
             price: 85,
-            rating: 5.0,
-            reviewCount: 89,
+            stock: 3,
             image: "https://images.unsplash.com/photo-1621607512214-68297f319087?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: true,
-            isBestSeller: false,
-            stockLevel: "Low",
-            shortDescription: "Precision engineered for a smooth shave.",
-            longDescription: "Crafted from stainless steel, this safety razor offers a barber-grade shave at home. Balanced weight distribution ensures perfect control."
+            description: "High-pigment professional black ink. Fade-resistant formula ensuring long-lasting richness and depth.",
+            predictedRestock: "Oct 25, 2026",
+            demand: "Low",
+            critical: true
         },
         {
             id: 5,
             name: "Sea Salt Spray",
-            category: "Styling",
+            sku: "SKU-SPRAY-005",
+            category: "Hair",
             price: 20,
-            rating: 4.5,
-            reviewCount: 120,
+            stock: 0,
             image: "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: false,
-            isBestSeller: true,
-            stockLevel: "High",
-            shortDescription: "Beach waves in a bottle.",
-            longDescription: "Achieve that post-beach texture with our Sea Salt Spray. Adds grip and volume for a relaxed, windswept look."
+            description: "Beach waves in a bottle. Achieve that post-beach texture with our Sea Salt Spray. Adds grip and volume.",
+            predictedRestock: "Urgent",
+            demand: "High",
+            critical: true
         },
         {
             id: 6,
-            name: "Charcoal Detox Soap Bar",
-            category: "Rituals",
-            price: 12,
-            rating: 4.8,
-            reviewCount: 230,
+            name: "Titanium Piercing Ring",
+            sku: "SKU-RING-006",
+            category: "Piercing",
+            price: 45,
+            stock: 65,
             image: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: false,
-            isBestSeller: false,
-            stockLevel: "High",
-            shortDescription: "Deep cleans pores.",
-            longDescription: "Activated charcoal cleanses pores deeply while shea butter nourishes the skin. Ideal for oily or acne-prone skin."
+            description: "Hypoallergenic titanium piercing ring. Medical grade material suitable for new and healed piercings.",
+            predictedRestock: "Dec 01, 2026",
+            demand: "Medium"
         },
         {
             id: 7,
             name: "Matte Clay",
-            category: "Styling",
+            sku: "SKU-CLAY-007",
+            category: "Hair",
             price: 26,
-            rating: 4.7,
-            reviewCount: 180,
+            stock: 22,
             image: "https://images.unsplash.com/photo-1620917670397-a4a5402a3c6c?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: true,
-            isBestSeller: false,
-            stockLevel: "Medium",
-            shortDescription: "Strong hold, no shine.",
-            longDescription: "Our strongest hold product. Keeps your style in place all day with a natural matte finish."
+            description: "Strong hold, no shine. Our strongest hold product. Keeps your style in place all day with a natural matte finish.",
+            predictedRestock: "Nov 10, 2026",
+            demand: "Medium"
         },
         {
             id: 8,
-            name: "Aftershave Balm",
-            category: "Grooming",
+            name: "Healing Balms",
+            sku: "SKU-BALM-008",
+            category: "Tattoo",
             price: 25,
-            rating: 4.9,
-            reviewCount: 140,
+            stock: 18,
             image: "https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=400",
-            isExpertChoice: false,
-            isBestSeller: true,
-            stockLevel: "High",
-            shortDescription: "Soothes razor burn instantly.",
-            longDescription: "Cooling menthol and chamomile calm irritated skin instantly after shaving. Alcohol-free formula prevents dryness."
+            description: "Post-tattoo care balm. Promotes healing and preserves color vibrance with natural vitamins.",
+            predictedRestock: "Nov 05, 2026",
+            demand: "Medium"
         }
     ];
+};
+
+export const addProduct = async (productData) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return { success: true, product: { id: Date.now(), ...productData } };
+};
+
+export const updateProduct = async (id, productData) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return { success: true, product: { id, ...productData } };
+};
+
+export const deleteProduct = async (id) => {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return { success: true, id };
 };
 
 export const getUserSettings = async () => {
@@ -407,6 +408,221 @@ export const getUserSettings = async () => {
         paymentMethods: [
             { id: 1, brand: 'Visa', last4: '4242', expiry: '12/28', isDefault: true },
             { id: 2, brand: 'Mastercard', last4: '8899', expiry: '09/27', isDefault: false }
+        ]
+    };
+};
+
+export const getAdminStats = async () => {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return {
+        revenue: {
+            value: "$124,500",
+            trend: "+12%",
+            isPositive: true,
+            label: "Total Revenue",
+            variant: 'solid'
+        },
+        appointments: {
+            value: "1,482",
+            subValue: "Avg. Order: $84",
+            trend: "+5.4%",
+            isPositive: true,
+            label: "Total Bookings"
+        },
+        newClients: {
+            value: "350",
+            subValue: "Retention: 82%",
+            trend: "+18%",
+            isPositive: true,
+            label: "New Clients"
+        },
+        satisfaction: {
+            value: "88%",
+            subValue: "Top: Sarah J.",
+            trend: "+2.4%",
+            isPositive: true,
+            label: "Staff Utilization"
+        }
+    };
+};
+
+export const getDashboardSchedule = async () => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return [
+        { id: 101, time: '09:00 AM', client: 'Alice Freeman', service: 'Full Hair Color', staff: 'Sarah' },
+        { id: 102, time: '10:30 AM', client: 'Michael Bond', service: 'Beard Trim', staff: 'David' },
+        { id: 103, time: '11:15 AM', client: 'Emma Wu', service: 'Manicure', staff: 'Jessica' },
+        { id: 104, time: '12:00 PM', client: 'Robert Green', service: 'Massage', staff: 'Mike' },
+    ];
+};
+
+export const getTopStaff = async () => {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return [
+        { id: 201, name: 'Sarah Jenkins', role: 'Stylist', revenue: '$4,200', rating: 4.9, avatar: 'https://ui-avatars.com/api/?name=Sarah+Jenkins&background=ffe4e6&color=be123c' },
+        { id: 202, name: 'David Chen', role: 'Barber', revenue: '$3,850', rating: 4.8, avatar: 'https://ui-avatars.com/api/?name=David+Chen&background=e0f2fe&color=0369a1' },
+        { id: 203, name: 'Jessica Wu', role: 'Nail Artist', revenue: '$3,100', rating: 5.0, avatar: 'https://ui-avatars.com/api/?name=Jessica+Wu&background=f0fdf4&color=15803d' },
+    ];
+};
+
+export const getLowStock = async () => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return [
+        { id: 301, name: 'Volcanic Ash Paste', stock: 4, unit: 'tubs' },
+        { id: 302, name: 'Sandalwood Beard Oil', stock: 2, unit: 'bottles' },
+        { id: 303, name: 'Premium Shampoo', stock: 5, unit: 'liters' },
+        { id: 304, name: 'Gold Face Masks', stock: 0, unit: 'packs', critical: true },
+    ];
+};
+
+export const triggerReorderItem = async (itemId) => {
+    await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate processing delay
+    return { success: true, message: "Order placed successfully" };
+};
+
+export const getRevenueData = async () => {
+    await new Promise(resolve => setTimeout(resolve, 700));
+    return [
+        { name: 'Mon', revenue: 4000 },
+        { name: 'Tue', revenue: 3000 },
+        { name: 'Wed', revenue: 2000 },
+        { name: 'Thu', revenue: 2780 },
+        { name: 'Fri', revenue: 1890 },
+        { name: 'Sat', revenue: 2390 },
+        { name: 'Sun', revenue: 3490 },
+    ];
+};
+
+export const getSmartInsights = async () => {
+    await new Promise(resolve => setTimeout(resolve, 500));
+    return [
+        { id: 1, type: "prediction", text: "Predicted Peak Hour: 2:00 PM today based on historical data.", confidence: "High" },
+        { id: 2, type: "alert", text: "Low stock alert: Volcanic Ash Texturizing Paste.", confidence: "Medium" },
+        { id: 3, type: "recommendation", text: "Consider adding more staff for Saturday afternoon slots.", confidence: "High" }
+    ];
+};
+
+export const getServices = async () => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return [
+        {
+            id: 1,
+            name: "Precision Haircut",
+            category: "Hair",
+            price: 45,
+            duration: "45 min",
+            image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80&w=300",
+            frequentlyBookedWith: "Beard Trim"
+        },
+        {
+            id: 2,
+            name: "Full Sleeve Session",
+            category: "Tattoo",
+            price: 350,
+            duration: "4 hrs",
+            image: "https://images.unsplash.com/photo-1590246814883-05add5d80d1b?auto=format&fit=crop&q=80&w=300",
+            frequentlyBookedWith: "Aftercare Kit"
+        },
+        {
+            id: 3,
+            name: "Deep Tissue Massage",
+            category: "Spa",
+            price: 90,
+            duration: "60 min",
+            image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=300",
+            frequentlyBookedWith: "Aromatherapy"
+        },
+        {
+            id: 4,
+            name: "Industrial Piercing",
+            category: "Piercing",
+            price: 50,
+            duration: "30 min",
+            image: "https://images.unsplash.com/photo-1626049755455-827dbd761de6?auto=format&fit=crop&q=80&w=300",
+            frequentlyBookedWith: "Saline Solution"
+        },
+        {
+            id: 5,
+            name: "Beard Trim & Sculpt",
+            category: "Hair",
+            price: 30,
+            duration: "30 min",
+            image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=300",
+            frequentlyBookedWith: "Haircut"
+        }
+    ];
+};
+
+export const addService = async (serviceData) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return { success: true, service: { id: Date.now(), ...serviceData } };
+};
+
+export const updateService = async (id, serviceData) => {
+    await new Promise(resolve => setTimeout(resolve, 800));
+    return { success: true, service: { id, ...serviceData } };
+};
+
+export const deleteService = async (id) => {
+    await new Promise(resolve => setTimeout(resolve, 600));
+    return { success: true, id };
+};
+
+export const getAnalyticsData = async (period = 'Last 30 Days') => {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    // Mock data changes based on period (simulated)
+    const multiplier = period === 'Yearly' ? 12 : period === 'Last 6 Months' ? 6 : 1;
+
+    return {
+        sentiments: [
+            { name: 'Positive', value: 65, color: '#f97316' }, // Orange
+            { name: 'Neutral', value: 25, color: '#78716c' }, // Stone
+            { name: 'Negative', value: 10, color: '#ef4444' } // Red
+        ],
+        clusters: [
+            // VIP: High Spend, High Frequency
+            { x: 80, y: 90, z: 200, segment: 'VIP' },
+            { x: 85, y: 85, z: 150, segment: 'VIP' },
+            { x: 90, y: 95, z: 300, segment: 'VIP' },
+            // Regular: Med Spend, Med Frequency
+            { x: 40, y: 50, z: 100, segment: 'Regular' },
+            { x: 45, y: 45, z: 80, segment: 'Regular' },
+            { x: 50, y: 55, z: 90, segment: 'Regular' },
+            // At-Risk: Low Frequency, varies Spend
+            { x: 10, y: 60, z: 50, segment: 'At-Risk' },
+            { x: 5, y: 20, z: 30, segment: 'At-Risk' },
+            { x: 15, y: 30, z: 40, segment: 'At-Risk' }
+        ],
+        forecast: [
+            { name: 'Jan', actual: 4000 * multiplier, predicted: 4100 * multiplier },
+            { name: 'Feb', actual: 3000 * multiplier, predicted: 3200 * multiplier },
+            { name: 'Mar', actual: 2000 * multiplier, predicted: 2400 * multiplier },
+            { name: 'Apr', actual: 2780 * multiplier, predicted: 2900 * multiplier },
+            { name: 'May', actual: 1890 * multiplier, predicted: 2100 * multiplier },
+            { name: 'Jun', actual: 2390 * multiplier, predicted: 2500 * multiplier },
+            { name: 'Jul', actual: null, predicted: 3600 * multiplier }, // Future
+            { name: 'Aug', actual: null, predicted: 4100 * multiplier }, // Future
+        ],
+        staffPerformance: [
+            { subject: 'Rating', A: 120, B: 110, fullMark: 150 },
+            { subject: 'Revenue', A: 98, B: 130, fullMark: 150 },
+            { subject: 'Retention', A: 86, B: 130, fullMark: 150 },
+            { subject: 'Punctuality', A: 99, B: 100, fullMark: 150 },
+            { subject: 'Bookings', A: 85, B: 90, fullMark: 150 },
+            { subject: 'Upsells', A: 65, B: 85, fullMark: 150 }
+        ],
+        miningInsights: [
+            {
+                type: 'prediction',
+                icon: 'TrendingUp',
+                text: 'Regrssion Model predicts a 15% increase in Spa services next month based on seasonal trends.'
+            },
+            {
+                type: 'cluster',
+                icon: 'Users',
+                text: 'K-Means Clustering identified 25 "At-Risk" customers who haven\'t visited in 90 days but have high past spend.'
+            }
         ]
     };
 };

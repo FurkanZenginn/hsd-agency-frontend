@@ -7,8 +7,11 @@ import Landing from './pages/Landing';
 import Register from './pages/user/Register';
 import Login from './pages/Login';
 import AdminOverview from './pages/admin/AdminOverview';
+import AdminProducts from './pages/admin/AdminProducts';
 import AdminAppointments from './pages/admin/AdminAppointments';
 import AdminStaff from './pages/admin/AdminStaff';
+import AdminServices from './pages/admin/AdminServices';
+import AdminAnalytics from './pages/admin/AdminAnalytics';
 import UserAppointments from './pages/user/UserAppointments';
 import Media from './pages/user/Media';
 import Profile from './pages/user/Profile';
@@ -45,8 +48,11 @@ function App() {
           <Route path="/admin" element={<AdminLayout />}>
             <Route index element={<Navigate to="overview" replace />} />
             <Route path="overview" element={<AdminOverview />} />
+            <Route path="products" element={<AdminProducts />} />
             <Route path="appointments" element={<AdminAppointments />} />
+            <Route path="services" element={<AdminServices />} />
             <Route path="staff" element={<AdminStaff />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
             <Route path="dashboard" element={<Navigate to="overview" replace />} />
           </Route>
 
