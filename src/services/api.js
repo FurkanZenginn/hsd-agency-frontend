@@ -404,11 +404,7 @@ export const getUserSettings = async () => {
         appearance: {
             theme: 'light',
             compactMode: false
-        },
-        paymentMethods: [
-            { id: 1, brand: 'Visa', last4: '4242', expiry: '12/28', isDefault: true },
-            { id: 2, brand: 'Mastercard', last4: '8899', expiry: '09/27', isDefault: false }
-        ]
+        }
     };
 };
 
@@ -512,7 +508,17 @@ export const getServices = async () => {
             price: 45,
             duration: "45 min",
             image: "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80&w=300",
-            frequentlyBookedWith: "Beard Trim"
+            frequentlyBookedWith: "Beard Trim",
+            description: "A customized haircut tailored to your face shape, hair type, and lifestyle. Our master stylists use advanced cutting techniques to deliver a look that's distinctly yours.",
+            processSteps: [
+                "Consultation to discuss styling goals",
+                "Invigorating shampoo and scalp massage",
+                "Precision cutting using shear and clipper techniques",
+                "Blow-dry and professional styling"
+            ],
+            preparation: "Please arrive with clean, dry hair. Bring inspiration photos if you have a specific style in mind.",
+            aftercare: "Use professional salon products to maintain the style. We recommend returning every 4-6 weeks to keep the shape.",
+            experts: [1, 2] // Referencing staff IDs
         },
         {
             id: 2,
@@ -521,7 +527,17 @@ export const getServices = async () => {
             price: 350,
             duration: "4 hrs",
             image: "https://images.unsplash.com/photo-1590246814883-05add5d80d1b?auto=format&fit=crop&q=80&w=300",
-            frequentlyBookedWith: "Aftercare Kit"
+            frequentlyBookedWith: "Aftercare Kit",
+            description: "Dedicated time for large-scale tattoo projects. This session is designed for continuing work on full sleeves, back pieces, or large custom designs.",
+            processSteps: [
+                "Design review and placement check",
+                "Skin preparation and stenciling",
+                "Tattooing session (outlining or shading depending on progress)",
+                "Cleaning and bandaging"
+            ],
+            preparation: "Eat a solid meal before arriving. Stay hydrated. Do not consume alcohol for 24 hours prior. Wear comfortable clothing that allows easy access to the area.",
+            aftercare: "Keep the bandage on for 2-4 hours. Wash gently with warm water and unscented soap. Apply a thin layer of specialized healing balm 2-3 times daily.",
+            experts: [6]
         },
         {
             id: 3,
@@ -530,7 +546,17 @@ export const getServices = async () => {
             price: 90,
             duration: "60 min",
             image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?auto=format&fit=crop&q=80&w=300",
-            frequentlyBookedWith: "Aromatherapy"
+            frequentlyBookedWith: "Aromatherapy",
+            description: "A therapeutic massage focusing on realigning deeper layers of muscles and connective tissue. Ideal for chronic aches, stiff necks, upper back pain, and tight leg muscles.",
+            processSteps: [
+                "Brief consultation on problem areas",
+                "Warm-up techniques to prep the muscles",
+                "Deep sustained pressure targeting inner layers",
+                "Cool down strokes and stretching"
+            ],
+            preparation: "Drink plenty of water before your appointment. Avoid eating a heavy meal right before.",
+            aftercare: "Drink extra water to flush out released toxins. You may experience slight soreness the next day, which is normal. Take a warm bath if possible.",
+            experts: [4]
         },
         {
             id: 4,
@@ -539,7 +565,17 @@ export const getServices = async () => {
             price: 50,
             duration: "30 min",
             image: "https://images.unsplash.com/photo-1626049755455-827dbd761de6?auto=format&fit=crop&q=80&w=300",
-            frequentlyBookedWith: "Saline Solution"
+            frequentlyBookedWith: "Saline Solution",
+            description: "A striking two-point piercing connected by a single straight barbell, typically through the upper cartilage of the ear.",
+            processSteps: [
+                "Anatomy check to ensure suitability",
+                "Sterilization of the area",
+                "Marking the entry and exit points",
+                "Piercing process and jewelry insertion"
+            ],
+            preparation: "Ensure you have eaten recently. Bring a valid photo ID. Avoid blood-thinning medications or alcohol beforehand.",
+            aftercare: "Clean twice daily with sterile saline solution. Do NOT twist or turn the jewelry. Avoid sleeping on the pierced ear until fully healed.",
+            experts: [6] // Assume James does piercings too for demo
         },
         {
             id: 5,
@@ -548,7 +584,17 @@ export const getServices = async () => {
             price: 30,
             duration: "30 min",
             image: "https://images.unsplash.com/photo-1621605815971-fbc98d665033?auto=format&fit=crop&q=80&w=300",
-            frequentlyBookedWith: "Haircut"
+            frequentlyBookedWith: "Haircut",
+            description: "Expert beard shaping, trimming, and conditioning to suit your facial structure.",
+            processSteps: [
+                "Hot towel application to soften hair",
+                "Trimming to desired length",
+                "Straight razor line-up for sharp edges",
+                "Application of premium beard oil"
+            ],
+            preparation: "None required. Just bring your glorious beard.",
+            aftercare: "Apply beard oil daily to maintain moisture and softness.",
+            experts: [2]
         }
     ];
 };
@@ -625,4 +671,12 @@ export const getAnalyticsData = async (period = 'Last 30 Days') => {
             }
         ]
     };
+};
+
+export const uploadProfileImage = async (formData) => {
+    // Simulate network delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+
+    // Mock successful response
+    return { success: true, message: "Image uploaded successfully" };
 };

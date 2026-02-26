@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Menu, LayoutDashboard, Calendar, Users, Image, ShoppingBag, Settings, User, LogOut } from 'lucide-react';
+import { Menu, X, LayoutDashboard, Calendar, Users, Image, ShoppingBag, Settings, User, LogOut, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { NavLink } from 'react-router-dom';
 
-const SidebarItem = ({ icon: Icon, label, to }) => (
+const SidebarItem = ({ icon: Icon, label, to, onClick }) => (
     <NavLink
         to={to}
+        onClick={onClick}
         className={({ isActive }) => `flex items-center space-x-3 px-4 py-3 rounded-xl cursor-pointer transition-all duration-300 group
     ${isActive
                 ? 'bg-orange-50 text-[var(--color-primary)] font-semibold shadow-sm border border-orange-100'
@@ -23,27 +24,36 @@ const SidebarItem = ({ icon: Icon, label, to }) => (
 
 const MainLayout = ({ children }) => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+    // Auto-Close Function
+    const handleNavigation = () => {
+        if (window.innerWidth < 1024) { // Only close on mobile/tablet (Tailwind lg breakpoint)
+            setIsSidebarOpen(false);
+        } else {
+            setIsSidebarOpen(false); // The user prompt requests auto-close. Given the sidebar is an overlay for all screens right now, closing it is always desired.
+        }
+    };
     const { user, logout } = useAuth();
 
     const isAdmin = user?.role === 'admin';
 
     return (
         <div className="flex min-h-screen bg-[var(--color-background)] text-[var(--color-foreground)]">
-            {/* Mobile Sidebar Overlay */}
+            {/* Sidebar Overlay (Backdrop) */}
             {isSidebarOpen && (
                 <div
-                    className="fixed inset-0 bg-stone-900/20 backdrop-blur-sm z-40 lg:hidden"
+                    className="fixed inset-0 bg-stone-900/40 backdrop-blur-sm z-40 transition-opacity duration-300"
                     onClick={() => setIsSidebarOpen(false)}
                 />
             )}
 
-            {/* Sidebar - Warm Light/Cream */}
+            {/* Sidebar - Drawer Style */}
             <aside className={`
-        fixed lg:static inset-y-0 left-0 z-50
-        w-72 bg-[#FAF7F2] border-r border-[#E5E0D8]
-        transform transition-transform duration-300 ease-out z-50
-        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
-      `}>
+                fixed inset-y-0 left-0 z-50
+                w-72 bg-[#FAF7F2] border-r border-[#E5E0D8]
+                transform transition-transform duration-300 ease-in-out
+                ${isSidebarOpen ? 'translate-x-0 shadow-2xl' : '-translate-x-full'}
+            `}>
                 <div className="h-24 flex items-center px-8">
                     <h1 className="text-2xl font-bold tracking-tight text-[var(--color-foreground)] flex items-center gap-2">
                         HSD <span className="font-medium text-[var(--color-primary)]">AGENCY</span>
@@ -57,31 +67,32 @@ const MainLayout = ({ children }) => {
 
                     {isAdmin && (
                         <>
-                            <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/admin-dashboard" />
-                            <SidebarItem icon={Calendar} label="Appointments" to="/appointments" />
-                            <SidebarItem icon={Users} label="Staff Management" to="/admin-dashboard" />
-                            <SidebarItem icon={ShoppingBag} label="Products" to="#" />
+                            <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/admin-dashboard" onClick={handleNavigation} />
+                            <SidebarItem icon={Calendar} label="Appointments" to="/appointments" onClick={handleNavigation} />
+                            <SidebarItem icon={Users} label="Staff Management" to="/admin-dashboard" onClick={handleNavigation} />
+                            <SidebarItem icon={ShoppingBag} label="Products" to="#" onClick={handleNavigation} />
                         </>
                     )}
 
                     {!isAdmin && (
                         <>
-                            <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/home" />
-                            <SidebarItem icon={ShoppingBag} label="Products" to="/products" />
-                            <SidebarItem icon={Users} label="Our Experts" to="/explore-staff" />
-                            <SidebarItem icon={Calendar} label="Appointments" to="/appointments" />
-                            <SidebarItem icon={Image} label="Media Gallery" to="/media" />
+                            <SidebarItem icon={LayoutDashboard} label="Dashboard" to="/home" onClick={handleNavigation} />
+                            <SidebarItem icon={ShoppingBag} label="Products" to="/products" onClick={handleNavigation} />
+                            <SidebarItem icon={Sparkles} label="Services" to="/services" onClick={handleNavigation} />
+                            <SidebarItem icon={Users} label="Our Experts" to="/explore-staff" onClick={handleNavigation} />
+                            <SidebarItem icon={Calendar} label="Appointments" to="/appointments" onClick={handleNavigation} />
+                            <SidebarItem icon={Image} label="Media Gallery" to="/media" onClick={handleNavigation} />
                         </>
                     )}
 
                     <div className="pt-8">
                         <div className="text-xs font-bold text-[#A8A29E] uppercase tracking-widest px-4 mb-4">Account</div>
-                        <SidebarItem icon={User} label="Profile" to="/profile" />
+                        <SidebarItem icon={User} label="Profile" to="/profile" onClick={handleNavigation} />
                     </div>
 
                     <div className="pt-2">
                         <div className="text-xs font-bold text-[#A8A29E] uppercase tracking-widest px-4 mb-4">Preferences</div>
-                        <SidebarItem icon={Settings} label="Settings" to="/settings" />
+                        <SidebarItem icon={Settings} label="Settings" to="/settings" onClick={handleNavigation} />
                     </div>
 
                     <div className="pt-8 px-4">
@@ -96,19 +107,19 @@ const MainLayout = ({ children }) => {
                 </nav>
             </aside>
 
-            {/* Main Content */}
-            <div className="flex-1 flex flex-col min-w-0 bg-[var(--color-background)]">
+            {/* Main Content - Full Width */}
+            <div className="flex-1 flex flex-col min-w-0 bg-[var(--color-background)] w-full">
                 {/* Navbar - Light and Warm */}
                 <header className="sticky top-0 z-30 h-20 px-4 lg:px-8 flex items-center justify-between bg-[var(--color-background)]/90 backdrop-blur-md border-b border-[#E5E0D8]">
                     <div className="flex items-center gap-4">
                         <button
-                            className="lg:hidden p-2 text-[var(--color-foreground-muted)] hover:text-[var(--color-foreground)] transition-colors"
-                            onClick={() => setIsSidebarOpen(true)}
+                            className="p-2 text-[var(--color-foreground-muted)] hover:text-orange-500 hover:bg-orange-50 rounded-lg transition-colors"
+                            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                         >
-                            <Menu size={24} />
+                            {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
                         </button>
-                        {/* Mobile Logo */}
-                        <div className="lg:hidden font-bold text-xl tracking-tight text-[var(--color-foreground)]">
+                        {/* Logo */}
+                        <div className="font-bold text-xl tracking-tight text-[var(--color-foreground)]">
                             HSD <span className="text-[var(--color-primary)]">AGENCY</span>
                         </div>
                     </div>

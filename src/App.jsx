@@ -12,6 +12,7 @@ import AdminAppointments from './pages/admin/AdminAppointments';
 import AdminStaff from './pages/admin/AdminStaff';
 import AdminServices from './pages/admin/AdminServices';
 import AdminAnalytics from './pages/admin/AdminAnalytics';
+import UserServices from './pages/user/UserServices';
 import UserAppointments from './pages/user/UserAppointments';
 import Media from './pages/user/Media';
 import Profile from './pages/user/Profile';
@@ -38,6 +39,7 @@ function App() {
           <Route path="/discovery" element={<Navigate to="/home" replace />} />
           <Route path="/appointments" element={<MainLayout><UserAppointments /></MainLayout>} />
           <Route path="/media" element={<MainLayout><Media /></MainLayout>} />
+          <Route path="/services" element={<MainLayout><UserServices /></MainLayout>} />
           <Route path="/explore-staff" element={<MainLayout><ExploreStaff /></MainLayout>} />
           <Route path="/products" element={<MainLayout><Products /></MainLayout>} />
           <Route path="/profile" element={<MainLayout><Profile /></MainLayout>} />
