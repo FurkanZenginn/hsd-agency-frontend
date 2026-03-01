@@ -1,32 +1,38 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { apiClient } from '../api/apiClient';
 
-export const useFetch = (url, options = {}) => {
+/**
+ * Herhangi bir API endpoint'inden veri çekmek için genel hook.
+ * Token ve hata yönetimi apiClient üzerinden yapılır.
+ *
+ * @param {string|null} endpoint - '/services' gibi path (null ise istek atılmaz)
+ * @param {object} options - ek seçenekler
+ */
+export const useFetch = (endpoint, options = {}) => {
     const [data, setData] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!!endpoint);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                const res = await fetch(url, options);
-                if (!res.ok) {
-                    throw new Error(`Error ${res.status}: ${res.statusText}`);
-                }
-                const json = await res.json();
-                setData(json);
-                setError(null);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const optionsKey = JSON.stringify(options);
 
-        if (url) {
-            fetchData();
+    const fetchData = useCallback(async () => {
+        if (!endpoint) return;
+        setLoading(true);
+        setError(null);
+        try {
+            const result = await apiClient.get(endpoint, JSON.parse(optionsKey));
+            setData(result);
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
-    }, [url, JSON.stringify(options)]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [endpoint, optionsKey]);
 
-    return { data, loading, error };
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
+    return { data, loading, error, refetch: fetchData };
 };

@@ -1,9 +1,9 @@
-import { createContext, useState } from 'react';
+import { createContext, useState, useCallback } from 'react';
+import { appointmentService } from '../api/appointmentService';
 
 export const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
-    // Current active booking being created
     const [bookingData, setBookingData] = useState({
         service: null,
         staff: null,
@@ -12,59 +12,55 @@ export const AppointmentProvider = ({ children }) => {
         notes: '',
     });
 
-    // List of all user appointments
-    const [appointments, setAppointments] = useState([
-        // Mock initial data
-        {
-            id: "a1",
-            service: { id: 's1', name: 'Hassas Kesim', duration: '60 dk', price: '$80' },
-            staff: { id: 'st1', name: 'Alex Johnson', role: 'Kıdemli Stilist' },
-            date: '2023-11-15',
-            time: '10:00 AM',
-            notes: '',
-            status: 'Completed'
+    const [appointments, setAppointments] = useState([]);
+    const [appointmentsLoading, setAppointmentsLoading] = useState(false);
+    const [appointmentsError, setAppointmentsError] = useState(null);
+
+    const fetchAppointments = useCallback(async () => {
+        setAppointmentsLoading(true);
+        setAppointmentsError(null);
+        try {
+            const data = await appointmentService.getAppointments();
+            setAppointments(Array.isArray(data) ? data : data?.appointments ?? []);
+        } catch (err) {
+            setAppointmentsError(err.message);
+        } finally {
+            setAppointmentsLoading(false);
         }
-    ]);
+    }, []);
 
     const updateBookingData = (stepData) => {
         setBookingData((prev) => ({ ...prev, ...stepData }));
     };
 
     const resetBooking = () => {
-        setBookingData({
-            service: null,
-            staff: null,
-            date: null,
-            time: null,
-            notes: '',
-        });
+        setBookingData({ service: null, staff: null, date: null, time: null, notes: '' });
     };
 
-    const addAppointment = (newAppt) => {
-        const appt = {
-            ...newAppt,
-            id: Math.random().toString(36).substr(2, 9),
-            status: 'Confirmed'
-        };
-        setAppointments((prev) => [appt, ...prev]);
-    };
+    const addAppointment = useCallback(async (newAppt) => {
+        const created = await appointmentService.createAppointment(newAppt);
+        setAppointments((prev) => [created, ...prev]);
+        return created;
+    }, []);
 
     const updateAppointment = (id, updatedData) => {
         setAppointments((prev) =>
-            prev.map(appt => appt.id === id ? { ...appt, ...updatedData } : appt)
+            prev.map((appt) => appt.id === id ? { ...appt, ...updatedData } : appt)
         );
     };
 
-    const cancelAppointment = (id) => {
+    const cancelAppointment = useCallback(async (id) => {
+        await appointmentService.cancelAppointment(id);
         setAppointments((prev) =>
-            prev.map(appt => appt.id === id ? { ...appt, status: 'Cancelled' } : appt)
+            prev.map((appt) => appt.id === id ? { ...appt, status: 'Cancelled' } : appt)
         );
-    };
+    }, []);
 
     return (
         <AppointmentContext.Provider value={{
             bookingData, updateBookingData, resetBooking,
-            appointments, addAppointment, updateAppointment, cancelAppointment
+            appointments, appointmentsLoading, appointmentsError,
+            fetchAppointments, addAppointment, updateAppointment, cancelAppointment,
         }}>
             {children}
         </AppointmentContext.Provider>
