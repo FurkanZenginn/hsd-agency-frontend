@@ -85,7 +85,7 @@ export const Navbar = () => {
 
                     {/* Centered Logo */}
                     <div className="shrink-0 px-8 transform transition-transform duration-500 hover:scale-[1.02]">
-                        <Link to="/" onClick={() => setIsOpen(false)}>
+                        <Link to="/" onClick={() => { setIsOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
                             <VintageLogo />
                         </Link>
                     </div>
@@ -171,7 +171,7 @@ export const Navbar = () => {
                         <p className="text-gray-500 mb-10 font-light text-lg">Hesabınızdan çıkış yapmak istediğinize emin misiniz?</p>
                         <div className="flex flex-col sm:flex-row gap-4">
                             <button onClick={() => setLogoutModal(false)} className="flex-1 py-4 bg-gray-50 text-gray-500 font-bold uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-gray-100 hover:text-dark transition-all duration-300 border border-gray-200">Vazgeç</button>
-                            <button onClick={() => { logout(); setLogoutModal(false); setIsOpen(false); }} className="flex-1 py-4 bg-red-500 text-white font-bold uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-red-600 transition-all duration-300 shadow-lg shadow-red-500/20">Çıkış Yap</button>
+                            <button onClick={async () => { await logout(); setLogoutModal(false); setIsOpen(false); }} className="flex-1 py-4 bg-red-500 text-white font-bold uppercase text-xs tracking-[0.2em] rounded-2xl hover:bg-red-600 transition-all duration-300 shadow-lg shadow-red-500/20">Çıkış Yap</button>
                         </div>
                     </div>
                 </div>

@@ -2,17 +2,29 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/Common/Button';
 import { Scissors } from 'lucide-react';
+import { authService } from '../api/authService';
 
 export const ForgotPassword = () => {
     const [email, setEmail] = useState('');
     const [submitted, setSubmitted] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (email) {
+        if (!email) return;
+        setError('');
+        setIsLoading(true);
+        try {
+            await authService.forgotPassword(email);
             setSubmitted(true);
+        } catch (err) {
+            setError(err.message || 'Bir hata oluştu. Lütfen tekrar deneyin.');
+        } finally {
+            setIsLoading(false);
         }
     };
+
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-dark px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
@@ -37,6 +49,11 @@ export const ForgotPassword = () => {
 
                 {!submitted ? (
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+                        {error && (
+                            <div className="bg-red-500/10 border border-red-500/30 p-4 rounded-xl">
+                                <p className="text-red-400 text-sm font-medium">{error}</p>
+                            </div>
+                        )}
                         <div className="space-y-4">
                             <div>
                                 <label className="sr-only">E-posta adresi</label>
@@ -52,8 +69,8 @@ export const ForgotPassword = () => {
                         </div>
 
                         <div className="pt-2">
-                            <Button type="submit" variant="primary" className="w-full">
-                                Bağlantı Gönder
+                            <Button type="submit" variant="primary" className="w-full" disabled={isLoading}>
+                                {isLoading ? 'Gönderiliyor...' : 'Bağlantı Gönder'}
                             </Button>
                         </div>
                     </form>

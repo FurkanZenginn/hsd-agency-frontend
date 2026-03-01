@@ -9,23 +9,35 @@ export const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
 
     if (isAuthenticated) {
         return <Navigate to="/dashboard" replace />;
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Mock authentication
-        if (email && password) {
-            login({ email, name: 'Misafir Kullanıcı' });
+        setError('');
+
+        if (password.length < 6) {
+            setError('Şifre en az 6 karakter olmalıdır.');
+            return;
+        }
+
+        setIsLoading(true);
+        try {
+            await login(email, password);
             navigate('/dashboard');
+        } catch (err) {
+            setError(err.message || 'Giriş yapılamadı. Lütfen tekrar deneyin.');
+        } finally {
+            setIsLoading(false);
         }
     };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-dark px-4 py-12 sm:px-6 lg:px-8 relative overflow-hidden">
-            {/* Background Image & Overlay */}
             <div className="absolute inset-0 z-0">
                 <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=2574&auto=format&fit=crop')] bg-cover bg-center opacity-30 animate-slow-zoom"></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-transparent"></div>
@@ -39,6 +51,12 @@ export const Login = () => {
                     <h2 className="text-4xl font-serif text-white mb-2">Hoş Geldiniz</h2>
                     <p className="text-sm text-gray-400 font-light">Randevunuzu almak için lütfen giriş yapın</p>
                 </div>
+
+                {error && (
+                    <div className="bg-red-500/10 border border-red-500/30 p-4 rounded-xl">
+                        <p className="text-red-400 text-sm font-medium">{error}</p>
+                    </div>
+                )}
 
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
                     <div className="space-y-4">
@@ -73,8 +91,8 @@ export const Login = () => {
                     </div>
 
                     <div className="pt-2">
-                        <Button type="submit" variant="primary" className="w-full">
-                            Giriş Yap
+                        <Button type="submit" variant="primary" className="w-full" disabled={isLoading}>
+                            {isLoading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
                         </Button>
                     </div>
 

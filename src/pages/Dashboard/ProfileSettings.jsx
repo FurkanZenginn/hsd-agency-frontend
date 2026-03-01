@@ -1,20 +1,34 @@
+import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../../components/Common/Button';
+import { formatPhoneNumber } from '../../utils/formatters';
 
 export const ProfileSettings = ({ view }) => {
-    const { user } = useAuth();
+    const { user, updateUser } = useAuth();
+    const [name, setName] = useState(user?.name || '');
+    const [email, setEmail] = useState(user?.email || '');
+    const [phone, setPhone] = useState(user?.phone || '+90');
+    const [saveMessage, setSaveMessage] = useState('');
+
+    const handleProfileSave = (e) => {
+        e.preventDefault();
+        updateUser({ name, email, phone });
+        setSaveMessage('Değişiklikler başarıyla kaydedildi!');
+        setTimeout(() => setSaveMessage(''), 3000);
+    };
 
     if (view === 'profile') {
         return (
             <div className="bg-white/80 backdrop-blur-md shadow-sm border border-gray-100 rounded-[2rem] p-8 md:p-12 max-w-3xl animate-fade-in-up transition-all duration-300">
                 <h2 className="text-3xl font-serif text-dark mb-8">Kişisel Bilgiler</h2>
-                <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
+                <form className="space-y-8" onSubmit={handleProfileSave}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
                             <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Ad Soyad</label>
                             <input
                                 type="text"
-                                defaultValue={user?.name || 'Ayşe Yılmaz'}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm font-light text-dark focus:bg-white"
                             />
                         </div>
@@ -22,7 +36,8 @@ export const ProfileSettings = ({ view }) => {
                             <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">E-posta Adresi</label>
                             <input
                                 type="email"
-                                defaultValue={user?.email || 'ayse@ornek.com'}
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm font-light text-dark focus:bg-white"
                             />
                         </div>
@@ -30,13 +45,17 @@ export const ProfileSettings = ({ view }) => {
                             <label className="block text-[10px] font-bold uppercase tracking-widest text-gray-500 mb-3">Telefon Numarası</label>
                             <input
                                 type="tel"
-                                defaultValue="+90 (555) 000-0000"
+                                value={phone}
+                                onChange={(e) => setPhone(formatPhoneNumber(e.target.value))}
                                 className="w-full px-5 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-1 focus:ring-primary-500 focus:border-primary-500 outline-none transition-all text-sm font-light text-dark focus:bg-white"
                             />
                         </div>
                     </div>
+                    {saveMessage && (
+                        <div className="text-green-600 text-sm font-medium animate-fade-in-up">{saveMessage}</div>
+                    )}
                     <div className="pt-8 border-t border-gray-100 flex justify-end">
-                        <Button variant="primary" className="px-10 py-4 text-xs tracking-[0.2em] uppercase shadow-lg shadow-primary-500/20">Değişiklikleri Kaydet</Button>
+                        <Button type="submit" variant="primary" className="px-10 py-4 text-xs tracking-[0.2em] uppercase shadow-lg shadow-primary-500/20">Değişiklikleri Kaydet</Button>
                     </div>
                 </form>
             </div>
