@@ -1,13 +1,23 @@
+import { useState, useEffect } from 'react';
 import { Button } from '../components/Common/Button';
 import { Link } from 'react-router-dom';
 import { Sparkles, Scissors, Droplets, Star, Heart, CheckCircle2 } from 'lucide-react';
 
-const SERVICES_DATA = [
+const ICON_MAP = {
+    'Scissors': <Scissors className="w-6 h-6 text-primary-500" />,
+    'Sparkles': <Sparkles className="w-6 h-6 text-primary-500" />,
+    'Droplets': <Droplets className="w-6 h-6 text-primary-500" />,
+    'Star': <Star className="w-6 h-6 text-primary-500" />,
+    'Heart': <Heart className="w-6 h-6 text-primary-500" />,
+    'CheckCircle2': <CheckCircle2 className="w-6 h-6 text-primary-500" />,
+};
+
+const DEFAULT_SERVICES = [
     {
         id: 1,
         name: 'Hassas Kesim',
-        icon: <Scissors className="w-6 h-6 text-primary-500" />,
-        desc: 'Yüz şeklinize ve yaşam tarzınıza uygun kişiselleştirilmiş saç kesimi.',
+        icon: 'Scissors',
+        description: 'Yüz şeklinize ve yaşam tarzınıza uygun kişiselleştirilmiş saç kesimi.',
         details: [
             'Detaylı saç ve yüz hatları analizi',
             'Sıcak havlu ile rahatlatıcı yıkama masajı',
@@ -18,8 +28,8 @@ const SERVICES_DATA = [
     {
         id: 2,
         name: 'Balyaj ve Işıltı',
-        icon: <Sparkles className="w-6 h-6 text-primary-500" />,
-        desc: 'Doğal, güneşte açılmış gibi görünen özel el boyaması ışıltılar.',
+        icon: 'Sparkles',
+        description: 'Doğal, güneşte açılmış gibi görünen özel el boyaması ışıltılar.',
         details: [
             'Renk danışmanlığı ve saç tonu testi',
             'Kişiselleştirilmiş serbest el boyama tekniği',
@@ -30,8 +40,8 @@ const SERVICES_DATA = [
     {
         id: 3,
         name: 'Keratin & Botox Bakımı',
-        icon: <Droplets className="w-6 h-6 text-primary-500" />,
-        desc: 'Aylarca süren pürüzsüz, ipeksi ve kabarmayan sağlıklı saçlar.',
+        icon: 'Droplets',
+        description: 'Aylarca süren pürüzsüz, ipeksi ve kabarmayan sağlıklı saçlar.',
         details: [
             'Derinlemesine arındırıcı hazırlık şampuanı',
             'Özel formüllü keratin veya saç botoksu uygulaması',
@@ -42,8 +52,8 @@ const SERVICES_DATA = [
     {
         id: 4,
         name: 'Gelin Saçı ve Makyajı',
-        icon: <Star className="w-6 h-6 text-primary-500" />,
-        desc: 'En özel gününüz için kusursuz, tüm gün dayanan profesyonel görünüm.',
+        icon: 'Star',
+        description: 'En özel gününüz için kusursuz, tüm gün dayanan profesyonel görünüm.',
         details: [
             'Ücretsiz ön prova ve saç tasarımı planlaması',
             'Dış çekim ve düğün konseptine uygun tasarım',
@@ -54,8 +64,8 @@ const SERVICES_DATA = [
     {
         id: 5,
         name: 'Saç Derisi Spa Terapisi',
-        icon: <Heart className="w-6 h-6 text-primary-500" />,
-        desc: 'Sağlıklı saç uzaması için derinlemesine temizleyici ve canlandırıcı bakım.',
+        icon: 'Heart',
+        description: 'Sağlıklı saç uzaması için derinlemesine temizleyici ve canlandırıcı bakım.',
         details: [
             'Mikro kameralı detaylı saç derisi analizi',
             'Peeling ile ölü hücrelerden arındırma',
@@ -66,8 +76,8 @@ const SERVICES_DATA = [
     {
         id: 6,
         name: 'Erkek Özel Bakımı',
-        icon: <CheckCircle2 className="w-6 h-6 text-primary-500" />,
-        desc: 'Modern kesimler, yüz hatlarına uygun geçişler ve sakal stil tasarımı.',
+        icon: 'CheckCircle2',
+        description: 'Modern kesimler, yüz hatlarına uygun geçişler ve sakal stil tasarımı.',
         details: [
             'Klasik veya modern saç kesimi ve şekillendirme',
             'Ustura ile detaylı ense ve favori temizliği',
@@ -77,7 +87,58 @@ const SERVICES_DATA = [
     },
 ];
 
+const ICON_CYCLE = ['Scissors', 'Sparkles', 'Droplets', 'Star', 'Heart', 'CheckCircle2'];
+
 export const Services = () => {
+    const [servicesData, setServicesData] = useState(DEFAULT_SERVICES);
+
+    useEffect(() => {
+        // localStorage'dan admin panelinde kaydedilen hizmetleri oku
+        try {
+            const stored = localStorage.getItem('hsd_services');
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                if (parsed && parsed.length > 0) {
+                    // Admin verilerini ana site formatına dönüştür
+                    const mapped = parsed.map((s, index) => ({
+                        id: s.id,
+                        name: s.name,
+                        icon: s.icon || ICON_CYCLE[index % ICON_CYCLE.length],
+                        description: s.description || s.desc || '',
+                        details: Array.isArray(s.details) ? s.details : (s.details ? s.details.split('\n').filter(d => d.trim()) : [])
+                    }));
+                    setServicesData(mapped);
+                }
+            }
+        } catch (e) {
+            console.error('localStorage okuma hatası', e);
+        }
+
+        // storage event dinle — admin panelinden değişiklik olursa güncelle
+        const handleStorage = (e) => {
+            if (e.key === 'hsd_services' && e.newValue) {
+                try {
+                    const parsed = JSON.parse(e.newValue);
+                    if (parsed && parsed.length > 0) {
+                        const mapped = parsed.map((s, index) => ({
+                            id: s.id,
+                            name: s.name,
+                            icon: s.icon || ICON_CYCLE[index % ICON_CYCLE.length],
+                            description: s.description || s.desc || '',
+                            details: Array.isArray(s.details) ? s.details : (s.details ? s.details.split('\n').filter(d => d.trim()) : [])
+                        }));
+                        setServicesData(mapped);
+                    }
+                } catch (err) {
+                    console.error('storage event parse hatası', err);
+                }
+            }
+        };
+
+        window.addEventListener('storage', handleStorage);
+        return () => window.removeEventListener('storage', handleStorage);
+    }, []);
+
     return (
         <div className="bg-light min-h-screen py-32">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,28 +151,30 @@ export const Services = () => {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                    {SERVICES_DATA.map((s, index) => (
+                    {servicesData.map((s, index) => (
                         <div key={s.id} className="group bg-white rounded-2xl p-8 md:p-10 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 border border-gray-100 flex flex-col h-full animate-fade-in-up" style={{ animationDelay: `${index * 0.1}s`, opacity: 0 }}>
                             <div className="flex items-center gap-4 mb-6">
                                 <div className="w-12 h-12 rounded-xl bg-primary-50 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-                                    {s.icon}
+                                    {ICON_MAP[s.icon] || ICON_MAP['Scissors']}
                                 </div>
                                 <h3 className="text-2xl font-serif text-dark group-hover:text-primary-600 transition-colors">{s.name}</h3>
                             </div>
 
-                            <p className="text-gray-600 mb-8 font-medium leading-relaxed border-b border-gray-100 pb-6">{s.desc}</p>
+                            <p className="text-gray-600 mb-8 font-medium leading-relaxed border-b border-gray-100 pb-6">{s.description}</p>
 
-                            <div className="flex-grow mb-10">
-                                <h4 className="text-[10px] uppercase font-bold tracking-widest text-gray-400 mb-4">Hizmet İçeriği</h4>
-                                <ul className="space-y-3">
-                                    {s.details.map((detail, idx) => (
-                                        <li key={idx} className="flex items-start gap-3">
-                                            <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0"></span>
-                                            <span className="text-sm text-gray-500 font-light leading-relaxed">{detail}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
+                            {s.details && s.details.length > 0 && (
+                                <div className="flex-grow mb-10">
+                                    <h4 className="text-[10px] uppercase font-bold tracking-widest text-gray-400 mb-4">Hizmet İçeriği</h4>
+                                    <ul className="space-y-3">
+                                        {s.details.map((detail, idx) => (
+                                            <li key={idx} className="flex items-start gap-3">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-primary-400 mt-2 flex-shrink-0"></span>
+                                                <span className="text-sm text-gray-500 font-light leading-relaxed">{detail}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
 
                             <Link to="/booking" className="mt-auto block">
                                 <Button variant="outline" className="w-full group-hover:bg-primary-500 group-hover:text-white group-hover:border-primary-500 transition-all duration-500">
@@ -125,4 +188,3 @@ export const Services = () => {
         </div>
     )
 }
-

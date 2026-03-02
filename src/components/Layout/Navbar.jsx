@@ -58,7 +58,7 @@ export const Navbar = () => {
 
     const rightLinks = [
         { name: 'Ekip', path: '/team' },
-        { name: 'Blog', path: '/blog' },
+        { name: 'Ürünler', path: '/urunler' },
         { name: 'İletişim', path: '/contact' },
     ];
 

@@ -9,7 +9,7 @@ import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { Team } from './pages/Team';
-import { Blog } from './pages/Blog';
+import { Products } from './pages/Products';
 import { Contact } from './pages/Contact';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
@@ -17,6 +17,15 @@ import { ForgotPassword } from './pages/ForgotPassword';
 import { Booking } from './pages/Booking';
 import { Dashboard } from './pages/Dashboard/Dashboard';
 import { useAuth } from './hooks/useAuth';
+import { useEffect } from 'react';
+
+// Admin paneline yönlendirme bileşeni
+function AdminRedirect() {
+    useEffect(() => {
+        window.location.href = '/admin/login';
+    }, []);
+    return null;
+}
 
 // The Home page is now accessible to everyone. 
 // If we want a separate redirect just for the login/register pages we handle that inside their components.
@@ -32,7 +41,7 @@ function App() {
                             <Route path="about" element={<About />} />
                             <Route path="services" element={<Services />} />
                             <Route path="team" element={<Team />} />
-                            <Route path="blog" element={<Blog />} />
+                            <Route path="urunler" element={<Products />} />
                             <Route path="contact" element={<Contact />} />
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
@@ -43,6 +52,9 @@ function App() {
                                 <Route path="dashboard" element={<Dashboard />} />
                             </Route>
                         </Route>
+
+                        {/* Admin paneline yönlendirme */}
+                        <Route path="/login.admin" element={<AdminRedirect />} />
                     </Routes>
                 </AppointmentProvider>
             </AuthProvider>
