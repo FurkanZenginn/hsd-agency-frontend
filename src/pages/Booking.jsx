@@ -127,8 +127,7 @@ export const Booking = ({ isDashboard = false, onBookingComplete }) => {
                                         className={`text-left p-6 rounded-2xl border transition-all duration-300 group ${bookingData.service?.id === srv.id ? 'border-primary-500 shadow-md ring-1 ring-primary-500 bg-primary-50/50' : 'border-gray-200 hover:border-primary-300 hover:shadow-md bg-white'}`}
                                     >
                                         <div className={`font-serif text-xl mb-2 transition-colors ${bookingData.service?.id === srv.id ? 'text-primary-700' : 'text-dark group-hover:text-primary-600'}`}>{srv.name}</div>
-                                        <div className="flex items-center justify-between mt-4 border-t pt-4 border-gray-100">
-                                            <span className="font-medium text-lg text-primary-600">{srv.price}</span>
+                                        <div className="flex items-center justify-end mt-4 border-t pt-4 border-gray-100">
                                             <span className={`text-[10px] tracking-widest font-bold uppercase ${bookingData.service?.id === srv.id ? 'text-primary-500' : 'text-gray-400'}`}>{srv.duration}</span>
                                         </div>
                                     </button>

@@ -99,8 +99,7 @@ const ProductCard = ({ product, onClick }) => (
                 {product.name}
             </h3>
             <p className="text-gray-500 text-sm mt-1 line-clamp-2 leading-relaxed">{product.description}</p>
-            <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
-                <span className="text-xl font-bold text-primary-500">₺{product.price}</span>
+            <div className="flex items-center justify-end mt-4 pt-4 border-t border-gray-100">
                 <span className="text-xs text-gray-400 uppercase tracking-wider font-medium group-hover:text-primary-500 transition-colors">
                     Detay →
                 </span>
@@ -142,8 +141,7 @@ const ProductModal = ({ product, onClose }) => {
                     <StarRating rating={product.rating || 4.5} />
                     <h2 className="text-2xl font-bold text-dark mt-3">{product.name}</h2>
                     <p className="text-gray-500 mt-3 leading-relaxed">{product.description}</p>
-                    <div className="mt-6 pt-6 border-t border-gray-100 flex items-center justify-between">
-                        <span className="text-3xl font-bold text-primary-500">₺{product.price}</span>
+                    <div className="mt-6 pt-6 border-t border-gray-100 flex items-center justify-end">
                         <span className="text-sm text-gray-400">Salonumuzda mevcuttur</span>
                     </div>
                 </div>
@@ -216,8 +214,8 @@ export const Products = () => {
                             key={cat}
                             onClick={() => setActiveCategory(cat)}
                             className={`px-5 py-2.5 text-xs font-bold uppercase tracking-[0.15em] rounded-full border transition-all duration-300 ${activeCategory === cat
-                                    ? 'bg-dark text-white border-dark shadow-lg shadow-dark/20'
-                                    : 'bg-white text-gray-500 border-gray-200 hover:border-dark hover:text-dark'
+                                ? 'bg-dark text-white border-dark shadow-lg shadow-dark/20'
+                                : 'bg-white text-gray-500 border-gray-200 hover:border-dark hover:text-dark'
                                 }`}
                         >
                             {cat}
