@@ -10,7 +10,7 @@ import { About } from './pages/About';
 import { Services } from './pages/Services';
 import { Team } from './pages/Team';
 import { Products } from './pages/Products';
-import { Contact } from './pages/Contact';
+import { Catalog } from './pages/Catalog';
 import { Login } from './pages/Login';
 import { Register } from './pages/Register';
 import { ForgotPassword } from './pages/ForgotPassword';
@@ -42,7 +42,8 @@ function App() {
                             <Route path="services" element={<Services />} />
                             <Route path="team" element={<Team />} />
                             <Route path="urunler" element={<Products />} />
-                            <Route path="contact" element={<Contact />} />
+                            <Route path="contact" element={<Catalog />} />
+                            <Route path="katalog" element={<Catalog />} />
                             <Route path="login" element={<Login />} />
                             <Route path="register" element={<Register />} />
                             <Route path="forgot-password" element={<ForgotPassword />} />
